@@ -1,1 +1,0 @@
-# goldmind_ia-
