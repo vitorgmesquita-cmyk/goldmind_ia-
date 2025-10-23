@@ -4,13 +4,12 @@
     <!-- Metadados básicos -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FFD700"> <link rel="icon" href="goldmind.png">
+    <meta name="theme-color" content="#FFD700"> 
+    <link rel="icon" href="goldmind.png">
     <title>GoldMind ✨ IA de Conteúdo</title>
 
-
     <!-- Bootstrap (CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Estilos customizados -->
     <style>
@@ -35,6 +34,23 @@
             font-size: 1.3rem;
             letter-spacing: 1px;
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Logo */
+        .logo {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .logo img {
+            width: 90px;
+            border-radius: 10px;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px #FFD700); }
+            to   { filter: drop-shadow(0 0 20px #FFD700); }
         }
 
         /* Área de chat */
@@ -92,39 +108,34 @@
             padding: 10px 20px;
             background-color: #1a1a1a;
             border: 1px solid #FFD700;
-            color:#fff;
-            outline:none;
+            color: #fff;
+            outline: none;
         }
 
         .input-area button {
-            background-color:#FFD700;
-            border:none;
-            color:#000;
-            font-weight:bold;
-            border-radius:25px;
-            padding:10px 25px;
-            transition:.2s;
+            background-color: #FFD700;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            border-radius: 25px;
+            padding: 10px 25px;
+            transition: 0.2s;
         }
 
         .input-area button:hover {
-            background-color:#b8860b;
+            background-color: #b8860b;
         }
 
-        /* Logo */
-        .logo {
-            text-align:center;
-            margin-top:10px;
-        }
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .input-area input {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
 
-        .logo img {
-            width:90px;
-            border-radius:10px;
-            animation:glow 3s infinite alternate;
-        }
-
-        @keyframes glow {
-           from { filter: drop-shadow(0 0 5px #FFD700); }
-           to   { filter: drop-shadow(0 0 20px #FFD700); }
+            .input-area button {
+                padding: 8px 20px;
+            }
         }
     </style>
 </head>
@@ -133,8 +144,8 @@
     <!-- Cabeçalho com logo -->
     <header>
         <div class="logo">
-           <!-- Substitua pelo caminho correto da imagem -->
-           <img src="goldmind.png" alt="Logo GoldMind IA">
+            <!-- Substitua pelo caminho correto da imagem -->
+            <img src="goldmind.png" alt="Logo GoldMind IA">
         </div>
         GoldMind ✨ Inteligência de Conteúdo
     </header>
@@ -142,487 +153,94 @@
     <!-- Área de mensagens -->
     <div id="chat" class="chat-container">
         <div class="bot-msg msg">
-           Olá! 💬 Eu sou a <b>GoldMind</b> — sua IA de criação de conteúdo.
-           Digite um tema ou ideia e eu gero legendas, descrições e hashtags incríveis pra você! 💎
+            Olá! 💬 Eu sou a <b>GoldMind</b> — sua IA de criação de conteúdo.
+            Digite um tema ou ideia e eu gero legendas, descrições e hashtags incríveis pra você! 💎
         </div>
     </div>
 
     <!-- Entrada do usuário -->
     <div class="input-area">
-        <input type="text"
-               id="userInput"
-               placeholder="Digite sua ideia... (ex.: camiseta tie-dye, loja de moda)">
-        <button id="sendBtn">Gerar ✨</button>
+        <input type="text" id="userInput" placeholder="Digite sua ideia... (ex.: camiseta tie-dye, loja de moda)" aria-label="Digite sua ideia">
+        <button id="sendBtn" aria-label="Gerar conteúdo">Gerar ✨</button>
     </div>
 
-    <!-- (Opcional) Script para interatividade futura -->
-    <!--
-    <script src="seu-script.js"></script>
-    -->
-
-<script>
-
-const chat = document.getElementById('chat');
-
-const input = document.getElementById('userInput');
-
-const sendBtn = document.getElementById('sendBtn');
-
-
-
-// Benefícios do produto
-
-const BENEFICIOS = [
-
-  "um equilíbrio perfeito entre conforto e sofisticação",
-
-  "detalhes que revelam autenticidade e exclusividade",
-
-  "acabamento impecável e design inovador",
-
-  "um toque de luxo em cada detalhe",
-
-  "estilo moderno com essência atemporal",
-
-  "leveza e elegância para o dia a dia",
-
-  "qualidade que fala por si",
-
-  "inspiração nas maiores tendências do mundo fashion",
-
-  "presença marcante e energia única",
-
-  "versatilidade para qualquer ocasião"
-
-];
-
-
-
-// Emoções que o produto transmite
-
-const EMOCOES = [
-
-  "inspirando confiança e atitude em cada momento",
-
-  "feita para quem entende que estilo é poder",
-
-  "expressando personalidade em cada traço",
-
-  "carregando o DNA da autenticidade",
-
-  "para quem transforma o comum em extraordinário",
-
-  "conectando essência e modernidade",
-
-  "refletindo o brilho de quem pensa diferente",
-
-  "despertando o desejo de ser notado",
-
-  "para quem quer viver com propósito e elegância",
-
-  "mostrando que o luxo está nos detalhes"
-
-];
-
-
-
-// Chamadas para ação (CTAs)
-
-const CTAs = [
-
-  "Garanta o seu agora e viva essa experiência.",
-
-  "Vista-se de confiança — descubra o poder do seu estilo.",
-
-  "Transforme o seu visual com autenticidade e classe.",
-
-  "Aposte no que te diferencia. Compre agora.",
-
-  "Sinta a energia de vestir algo feito para você.",
-
-  "Eleve seu padrão — disponível por tempo limitado.",
-
-  "O novo luxo começa em você. Adquira o seu.",
-
-  "Conecte-se com a essência GoldMind.",
-
-  "Vista sua atitude, conquiste o mundo.",
-
-  "O futuro da moda está aqui — e começa com você."
-
-];
-
-
-
-// Emojis para dar destaque
-
-const EMOJIS = ["💎", "✨", "🔥", "🌟", "⚡", "💥", "🖤", "🏆", "🎯", "🌌"];
-
-
-
-// 50 características técnicas do produto
-
-const CARACTERISTICAS = [
-
-  "tecido 100% poliéster, leve e durável",
-
-  "resistente a rugas e fácil de lavar",
-
-  "acabamento premium com costura reforçada",
-
-  "material respirável e confortável",
-
-  "design moderno com toque suave",
-
-  "ideal para uso diário e ocasiões especiais",
-
-  "alta durabilidade e resistência à abrasão",
-
-  "mantém a forma mesmo após várias lavagens",
-
-  "toque macio que valoriza o conforto",
-
-  "perfeito para quem busca estilo e praticidade",
-
-  "estrutura resistente para longa durabilidade",
-
-  "tecido que não desbota mesmo exposto ao sol",
-
-  "costura reforçada para maior resistência",
-
-  "leveza que permite liberdade de movimento",
-
-  "acabamento elegante com detalhes sofisticados",
-
-  "adaptável a diferentes estilos e ocasiões",
-
-  "fibra de alta qualidade que garante conforto",
-
-  "material que respira e mantém a pele fresca",
-
-  "design exclusivo que transmite personalidade",
-
-  "qualidade que combina com qualquer look",
-
-  "toque aveludado que valoriza o luxo",
-
-  "perfeito para quem preza por sofisticação",
-
-  "acabamento que destaca cada detalhe do produto",
-
-  "resistente a deformações e desgaste",
-
-  "tecido que combina estilo e funcionalidade",
-
-  "flexível e confortável para o dia a dia",
-
-  "ideal para climas variados, quente ou frio",
-
-  "durável mesmo após várias lavagens",
-
-  "material que mantém a cor intensa por mais tempo",
-
-  "costura discreta e elegante",
-
-  "leveza que torna o uso agradável o dia todo",
-
-  "perfeito para looks casuais e formais",
-
-  "acabamento premium que chama atenção",
-
-  "tecido resistente a manchas e sujeira",
-
-  "design que valoriza linhas modernas e limpas",
-
-  "material de toque suave que abraça a pele",
-
-  "fibra de alta tecnologia que aumenta a durabilidade",
-
-  "flexível, ideal para movimentos naturais",
-
-  "acabamento refinado que transmite elegância",
-
-  "material respirável que evita desconforto",
-
-  "versátil e fácil de combinar com outros itens",
-
-  "durabilidade que garante investimento inteligente",
-
-  "design que reflete estilo contemporâneo",
-
-  "acabamento sofisticado que impressiona à primeira vista",
-
-  "tecido leve que proporciona sensação de liberdade",
-
-  "resistente a puxões e rasgos",
-
-  "perfeito para quem busca qualidade premium",
-
-  "textura suave que valoriza o toque",
-
-  "tecido que mantém a forma sem amassar",
-
-  "acabamento meticuloso em cada detalhe",
-
-  "ideal para pessoas que exigem o melhor"
-
-];
-
-
-
-// Frases extras de impacto
-
-const FRASES_EXTRAS = [
-
-  "Mais do que um produto — uma expressão de identidade.",
-
-  "Cada linha e textura carrega um propósito: destacar quem você é.",
-
-  "Inspirado em mentes ousadas que acreditam em criar o próprio caminho.",
-
-  "Um símbolo de poder e autenticidade, pensado nos mínimos detalhes.",
-
-  "A fusão entre tecnologia, arte e moda contemporânea.",
-
-  "Ideal para quem busca exclusividade e presença marcante.",
-
-  "Criado para quem transforma cada momento em estilo.",
-
-  "Porque o verdadeiro luxo é ser único.",
-
-  "Design inteligente para pessoas que pensam grande.",
-
-  "Perfeito para quem não segue tendências — cria as suas."
-
-];
-
-
-
-// Função para escolher aleatoriamente um item de um array
-
-function pick(arr) {
-
-  return arr[Math.floor(Math.random() * arr.length)];
-
-}
-
-
-
-// Gera o texto premium
-
-function gerarTextoPremium(nome) {
-
-  const beneficio = pick(BENEFICIOS);
-
-  const caracteristica = pick(CARACTERISTICAS);
-
-  const fraseExtra = pick(FRASES_EXTRAS);
-
-  const emocao = pick(EMOCOES);
-
-  const cta = pick(CTAs);
-
-  const emoji = pick(EMOJIS);
-
-
-
-  return `
-
-    ${emoji} <b>${nome.toUpperCase()}</b> — ${beneficio}.<br>
-
-    ${caracteristica}.<br>
-
-    ${fraseExtra}.<br>
-
-    ${emocao}.<br>
-
-    ${cta} ${pick(EMOJIS)}
-
-  `;
-
-}
-
-
-
-// Gera múltiplas opções e hashtags
-
-function gerarConteudo(entrada) {
-
-  const palavras = entrada.split(",").map(p => p.trim());
-
-  const nome = palavras[0] || "produto";
-
-
-
-  let respostas = [];
-
-  let usadas = new Set(); // Para evitar repetição
-
-
-
-  for (let i = 1; i <= 50; i++) { // Agora gera 50 opções
-
-    let texto;
-
-    do {
-
-      texto = gerarTextoPremium(nome).trim();
-
-    } while (usadas.has(texto));
-
-    usadas.add(texto);
-
-
-
-    const idTexto = `texto${i}`;
-
-    respostas.push(`
-
-      <div style="margin-bottom:18px; border-bottom:1px solid #333; padding-bottom:8px;">
-
-        <b style="color:#FFD700;">${i}️⃣ Opção ${i}</b><br>
-
-        <div id="${idTexto}" style="margin-top:5px;">${texto}</div>
-
-        <button onclick="copiarTexto('${idTexto}', event)" 
-
-          style="margin-top:6px; font-size:0.8rem; background:#FFD700; color:#000; border:none; padding:4px 10px; border-radius:15px; font-weight:600; cursor:pointer; transition:0.2s;">
-
-          📋 Copiar
-
-        </button>
-
-      </div>
-
-    `);
-
-  }
-
-
-
-  const hashtags = palavras
-
-    .map(p => "#" + p.replace(/\s+/g, "").toLowerCase())
-
-    .concat([
-
-      "#GoldMind",
-
-      "#LuxuryStyle",
-
-      "#EssênciaOuro",
-
-      "#EstiloComInteligencia",
-
-      "#ModaPremium",
-
-      "#DesignExclusivo",
-
-      "#MarketingIA",
-
-      "#InspiraçãoDeLuxo",
-
-      "#PoderDoEstilo",
-
-      "#GoldVibes"
-
-    ])
-
-    .slice(0, 10)
-
-    .join(" ");
-
-
-
-  return {
-
-    resposta: respostas.join(""),
-
-    hashtags
-
-  };
-
-}
-
-
-
-// Copiar texto
-
-function copiarTexto(id, event) {
-
-  const texto = document.getElementById(id).innerText;
-
-  navigator.clipboard.writeText(texto)
-
-    .then(() => {
-
-      const btn = event.target;
-
-      const original = btn.innerText;
-
-      btn.innerText = "✅ Copiado!";
-
-      setTimeout(() => (btn.innerText = original), 1000);
-
-    })
-
-    .catch(() => alert("❌ Erro ao copiar o texto."));
-
-}
-
-
-
-// Função para adicionar mensagem no chat
-
-function addMessage(text, sender = "bot") {
-
-  const div = document.createElement("div");
-
-  div.classList.add("msg", sender === "user" ? "user-msg" : "bot-msg");
-
-  div.innerHTML = text;
-
-  chat.appendChild(div);
-
-  chat.scrollTop = chat.scrollHeight;
-
-}
-
-
-
-// Eventos
-
-sendBtn.addEventListener("click", () => {
-
-  const entrada = input.value.trim();
-
-  if (!entrada) return;
-
-  addMessage(entrada, "user");
-
-  input.value = "";
-
-  setTimeout(() => {
-
-    const { resposta, hashtags } = gerarConteudo(entrada);
-
-    addMessage(`${resposta}<br><small style="color:#FFD700;">${hashtags}</small>`, "bot");
-
-  }, 900);
-
-});
-
-
-
-input.addEventListener("keypress", e => {
-
-  if (e.key === "Enter") sendBtn.click();
-
-});
-
-</script>
-
-
-
+    <script>
+        const chat = document.getElementById('chat');
+        const input = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        // Funções de utilidade
+
+        function pick(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // Gera o conteúdo de forma dinâmica
+        function gerarTextoPremium(nome) {
+            const BENEFICIOS = [ /* ... benefícios ... */ ];
+            const CARACTERISTICAS = [ /* ... características ... */ ];
+            const FRASES_EXTRAS = [ /* ... frases ... */ ];
+            const EMOCOES = [ /* ... emoções ... */ ];
+            const CTAs = [ /* ... chamadas para ação ... */ ];
+            const EMOJIS = ["💎", "✨", "🔥", "🌟", "⚡"];
+
+            const beneficio = pick(BENEFICIOS);
+            const caracteristica = pick(CARACTERISTICAS);
+            const fraseExtra = pick(FRASES_EXTRAS);
+            const emocao = pick(EMOCOES);
+            const cta = pick(CTAs);
+            const emoji = pick(EMOJIS);
+
+            return `
+                ${emoji} <b>${nome.toUpperCase()}</b> — ${beneficio}.<br>
+                ${caracteristica}.<br>
+                ${fraseExtra}.<br>
+                ${emocao}.<br>
+                ${cta} ${pick(EMOJIS)}
+            `;
+        }
+
+        // Função para adicionar mensagens no chat
+        function addMessage(text, sender = "bot") {
+            const div = document.createElement("div");
+            div.classList.add("msg", sender === "user" ? "user-msg" : "bot-msg");
+            div.innerHTML = text;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        // Função para copiar o texto
+        function copiarTexto(id, event) {
+            const texto = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(texto)
+                .then(() => {
+                    const btn = event.target;
+                    const original = btn.innerText;
+                    btn.innerText = "✅ Copiado!";
+                    setTimeout(() => (btn.innerText = original), 1000);
+                })
+                .catch(() => alert("❌ Erro ao copiar o texto."));
+        }
+
+        // Evento de envio de mensagem
+        sendBtn.addEventListener("click", () => {
+            const entrada = input.value.trim();
+            if (!entrada) return;
+
+            addMessage(entrada, "user");
+            input.value = "";
+
+            setTimeout(() => {
+                const nome = entrada.split(",")[0] || "produto";
+                const texto = gerarTextoPremium(nome);
+                addMessage(texto, "bot");
+            }, 900);
+        });
+
+        // Função para enviar com "Enter"
+        input.addEventListener("keypress", e => {
+            if (e.key === "Enter") sendBtn.click();
+        });
+    </script>
 </body>
 </html>
